@@ -15,7 +15,6 @@ apscheduler = "^3.11.0"
 pygame = "^2.6.1"
 pillow = "^11.3.0"
 appdirs = "^1.4.4"
-python-vlc = "^3.0.21203"
 pyglet = "^2.1.8"
 concurrent-log-handler = "^0.9.28"
 
