@@ -117,7 +117,7 @@ class Scheduler(StateMachine):
                     # Split by comma
                     parts = [p.strip() for p in line.split(',')]
                     if len(parts) != 3:
-                        message = f'Line has wrong format: \'{line}\'.'
+                        message = f'Line has wrong format: \'{line}\'. No intervals will be added.'
                         LOGGER.error(message)
                         raise ValueError(message)
 
