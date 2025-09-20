@@ -42,7 +42,7 @@ class View(tk.Tk):
     _PLAYLIST_DIRECTORY_SELECTED_STRING: ClassVar[str] = 'Selected Playlist - '
 
     _ERROR_WINDOW_TITLE: ClassVar[str] = 'Error'
-    _ERROR_WINDOW_SIZE: ClassVar[str] = '300x150'
+    _ERROR_WINDOW_SIZE: ClassVar[str] = '350x250'
     
 
     def __init__(self) -> None:
