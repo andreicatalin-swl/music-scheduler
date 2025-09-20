@@ -1,12 +1,12 @@
 [tool.poetry]
-name = "school-sound-system"
+name = "music-scheduler"
 version = "0.0.1"
 description = ""
 authors = ["Olariu Andrei Cătălin <andreicatalin.swl@gmail.com>"]
 license = "None"
 readme = "README.md"
 packages = [
-    { include = "schoolsoundsystem", from = "src" }
+    { include = "musicscheduler", from = "src" }
 ]
 
 [tool.poetry.dependencies]
