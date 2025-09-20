@@ -13,7 +13,7 @@ LOGGING_FILE_HANDLER_THRESHOLD_LEVEL = DEBUG
 LOGGER = get_logger(__name__, LOGGING_CONSOLE_HANDLER_THRESHOLD_LEVEL, LOGGING_FILE_HANDLER_THRESHOLD_LEVEL)
 
 class View(tk.Tk):
-    _WINDOW_TITLE: ClassVar[str] = 'School Music Player'
+    _WINDOW_TITLE: ClassVar[str] = 'Music Scheduler'
     _WINDOW_SIZE: ClassVar[str] = '800x600'
     _RESIZABLE_WINDOW_WIDTH: ClassVar[bool] = False
     _RESIZABLE_WINDOW_HEIGHT: ClassVar[bool] = False
@@ -77,7 +77,7 @@ class View(tk.Tk):
         top_frame = tk.Frame(self, bg=self._BG)
         top_frame.pack(fill="x", padx=24, pady=(18,12))
 
-        self.title_label = tk.Label(top_frame, text='🎵 School Music Player', font=('Inter', 20, 'bold'), bg=self._BG, fg=self._FG)
+        self.title_label = tk.Label(top_frame, text='🎵 Music Scheduler', font=('Inter', 20, 'bold'), bg=self._BG, fg=self._FG)
         self.title_label.pack(side='left', anchor='nw')
 
         self.time_label = tk.Label(top_frame, text='', font=('Inter', 14), bg=self._BG, fg=self._FG)
