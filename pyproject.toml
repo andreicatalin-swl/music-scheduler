@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "school-sound-system"
+version = "0.0.1"
+description = ""
+authors = ["Olariu Andrei Cătălin <andreicatalin.swl@gmail.com>"]
+license = "None"
+readme = "README.md"
+packages = [
+    { include = "schoolsoundsystem", from = "src" }
+]
+
+[tool.poetry.dependencies]
+python = ">=3.13"
+apscheduler = "^3.11.0"
+pygame = "^2.6.1"
+pillow = "^11.3.0"
+appdirs = "^1.4.4"
+python-vlc = "^3.0.21203"
+pyglet = "^2.1.8"
+concurrent-log-handler = "^0.9.28"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
