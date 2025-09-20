@@ -1,11 +1,11 @@
-from schoolsoundsystem.player.playlist import Playlist
-from schoolsoundsystem.player.scheduler import Scheduler
-from schoolsoundsystem.player.state import State
-from schoolsoundsystem.player.state_machine import StateMachine
-from schoolsoundsystem.utils.logger import get_logger
+from musicscheduler.player.playlist import Playlist
+from musicscheduler.player.scheduler import Scheduler
+from musicscheduler.player.state import State
+from musicscheduler.player.state_machine import StateMachine
+from musicscheduler.utils.logger import get_logger
 from logging import INFO, DEBUG
 
-from schoolsoundsystem.utils.queueing import Queueing
+from musicscheduler.utils.queueing import Queueing
 
 LOGGING_CONSOLE_HANDLER_THRESHOLD_LEVEL = INFO
 LOGGING_FILE_HANDLER_THRESHOLD_LEVEL = DEBUG

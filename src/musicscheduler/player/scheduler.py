@@ -1,12 +1,12 @@
 import os
 from datetime import datetime
 from typing import Callable, ClassVar
-from schoolsoundsystem.player.state import State
-from schoolsoundsystem.player.state_machine import StateMachine
+from musicscheduler.player.state import State
+from musicscheduler.player.state_machine import StateMachine
 from apscheduler.executors.pool import ThreadPoolExecutor
 from apscheduler.schedulers.background import BackgroundScheduler
-from schoolsoundsystem.utils.cache import Cache
-from schoolsoundsystem.utils.logger import get_logger
+from musicscheduler.utils.cache import Cache
+from musicscheduler.utils.logger import get_logger
 from logging import INFO, DEBUG
 
 LOGGING_CONSOLE_HANDLER_THRESHOLD_LEVEL = INFO

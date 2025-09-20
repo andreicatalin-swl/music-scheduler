@@ -1,9 +1,9 @@
 import tkinter as tk
 from tkinter import filedialog
-from schoolsoundsystem.mvc.model import Model
-from schoolsoundsystem.mvc.view import View
-from schoolsoundsystem.utils.cache import Cache
-from schoolsoundsystem.utils.logger import get_logger
+from musicscheduler.mvc.model import Model
+from musicscheduler.mvc.view import View
+from musicscheduler.utils.cache import Cache
+from musicscheduler.utils.logger import get_logger
 from logging import INFO, DEBUG
 
 LOGGING_CONSOLE_HANDLER_THRESHOLD_LEVEL = INFO

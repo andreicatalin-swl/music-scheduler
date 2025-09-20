@@ -3,10 +3,10 @@ import random
 import threading
 import pygame
 from typing import ClassVar, Optional
-from schoolsoundsystem.player.state import State
-from schoolsoundsystem.player.state_machine import StateMachine
-from schoolsoundsystem.utils.cache import Cache
-from schoolsoundsystem.utils.logger import get_logger
+from musicscheduler.player.state import State
+from musicscheduler.player.state_machine import StateMachine
+from musicscheduler.utils.cache import Cache
+from musicscheduler.utils.logger import get_logger
 from logging import INFO, DEBUG
 
 LOGGING_CONSOLE_HANDLER_THRESHOLD_LEVEL = INFO

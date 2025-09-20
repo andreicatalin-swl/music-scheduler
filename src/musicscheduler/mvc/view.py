@@ -5,7 +5,7 @@ import tkinter as tk
 from tkinter import ttk
 from typing import Any, Callable, ClassVar
 from PIL import Image, ImageTk
-from schoolsoundsystem.utils.logger import get_logger
+from musicscheduler.utils.logger import get_logger
 from logging import INFO, DEBUG
 
 LOGGING_CONSOLE_HANDLER_THRESHOLD_LEVEL = INFO

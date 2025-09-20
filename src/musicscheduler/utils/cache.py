@@ -2,8 +2,8 @@ import os
 import json
 from typing import Any, ClassVar
 from appdirs import user_data_dir
-from schoolsoundsystem.__about__ import __app_name__, __author__
-from schoolsoundsystem.utils.logger import get_logger
+from musicscheduler.__about__ import __app_name__, __author__
+from musicscheduler.utils.logger import get_logger
 from logging import INFO, DEBUG
 
 LOGGING_CONSOLE_HANDLER_THRESHOLD_LEVEL = INFO

@@ -1,5 +1,5 @@
 from typing import Any, Callable
-from schoolsoundsystem.utils.logger import get_logger
+from musicscheduler.utils.logger import get_logger
 from logging import INFO, DEBUG
 
 LOGGING_CONSOLE_HANDLER_THRESHOLD_LEVEL = INFO

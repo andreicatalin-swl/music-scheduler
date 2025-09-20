@@ -4,7 +4,7 @@ import logging
 from concurrent_log_handler import ConcurrentRotatingFileHandler
 from typing import Optional
 from appdirs import user_data_dir
-from schoolsoundsystem.__about__ import __app_name__, __author__
+from musicscheduler.__about__ import __app_name__, __author__
 
 LOGGING_FORMAT = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 LOGGING_FORMATTER = logging.Formatter(LOGGING_FORMAT)
