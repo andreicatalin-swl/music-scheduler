@@ -1,2 +1,2 @@
-__app_name__ = 'School Sound System'
+__app_name__ = 'Music Scheduler'
 __author__ = 'Olariu Andrei Cătălin'
