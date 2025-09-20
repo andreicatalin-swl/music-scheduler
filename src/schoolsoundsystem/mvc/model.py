@@ -66,6 +66,18 @@ class Model:
             on_success()
 
         self._queueing.add(function)
+
+    def set_playlist_shuffle(self, shuffle: bool, on_success: Callable[[], None], on_failure: Callable[[Exception], None]) -> None:
+        # Define task
+        def function():
+            try:
+                self._player.set_playlist_shuffle(shuffle)
+            except Exception as e:
+                on_failure(e)
+                return
+            on_success()
+        
+        self._queueing.add(function)
     
     def get_is_active(self, on_success: Callable[[bool], None], on_failure: Callable[[Exception], None]) -> None:
         # Define task
