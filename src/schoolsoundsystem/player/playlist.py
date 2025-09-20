@@ -21,7 +21,7 @@ class Playlist(StateMachine):
     })
 
     _DEFAULT_DIRECTORY: ClassVar[str] = ''
-    _DEFAULT_SHUFFLE: ClassVar[bool] = True
+    _DEFAULT_SHUFFLE: ClassVar[bool] = False
     
     _VALID_EXTENSIONS: tuple[str, ...] = ('.mp3', '.wav', '.flac')
     _UPDATE_RATE: int = 10
