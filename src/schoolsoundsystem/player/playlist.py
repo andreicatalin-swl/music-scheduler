@@ -112,7 +112,7 @@ class Playlist(StateMachine):
                         break
 
         # Initialize worker thread to play tracks
-        self._worker = threading.Thread(target=playback)
+        self._worker = threading.Thread(target=playback, daemon=True)
         # Start worker thread
         self._worker.start()
         
