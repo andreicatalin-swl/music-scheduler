@@ -21,7 +21,6 @@ class View(tk.Tk):
     _BG: ClassVar[str] = '#121212'
     _CARD_BG: ClassVar[str] = '#1E1E1E'    
     _FG: ClassVar[str] = '#E0E0E0'
-
     _PURPLE: ClassVar[str] = '#6C4CFF'
 
     _INACTIVE_STATUS_COLOR: ClassVar[str] = '#f23030'
@@ -53,6 +52,10 @@ class View(tk.Tk):
         self.geometry(self._WINDOW_SIZE)
         self.resizable(self._RESIZABLE_WINDOW_HEIGHT, self._RESIZABLE_WINDOW_HEIGHT)
         self.configure(bg=self._BG)
+
+        # Set application icon
+        icon_path = View._get_resource_path(os.path.join('assets', 'icon.ico'))
+        self.iconbitmap(icon_path)
         
         # Build UI
         self._build_ui()
