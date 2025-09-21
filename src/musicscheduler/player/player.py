@@ -63,8 +63,7 @@ class Player(StateMachine):
     def _on_start(self) -> None:
         # Define on success callback
         def on_success():
-            message = f'Function execution successful.'
-            LOGGER.debug(message)
+            pass
         # Define on failure callback
         def on_failure(e):
             message = f'Function execution failed: \'{e}\'.'
@@ -83,8 +82,7 @@ class Player(StateMachine):
     def _on_end(self) -> None:
         # Define on success callback
         def on_success():
-            message = f'Function execution successful.'
-            LOGGER.debug(message)
+            pass
         # Define on failure callback
         def on_failure(e):
             message = f'Function execution failed: \'{e}\'.'
