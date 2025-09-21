@@ -111,10 +111,15 @@ class Playlist(StateMachine):
                     if self._state == State.INACTIVE:
                         break
 
-        # Initialize worker thread to play tracks
-        self._worker = threading.Thread(target=playback, daemon=True)
-        # Start worker thread
-        self._worker.start()
+        if self._worker is not None:
+            message = f'Cannot active worker thread: worker thread already has a reference to another object.'
+            LOGGER.error(message)
+            raise RuntimeError(message)
+        else:
+            # Initialize worker thread to play tracks
+            self._worker = threading.Thread(target=playback, daemon=True)
+            # Start worker thread
+            self._worker.start()
         
     def deactivate(self) -> None:
         super().deactivate()
