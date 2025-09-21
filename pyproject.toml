@@ -17,6 +17,7 @@ pillow = "^11.3.0"
 appdirs = "^1.4.4"
 pyglet = "^2.1.8"
 concurrent-log-handler = "^0.9.28"
+wakepy = "^0.10.2.post1"
 
 [tool.poetry.group.dev.dependencies]
 pyinstaller = "^6.16.0"
