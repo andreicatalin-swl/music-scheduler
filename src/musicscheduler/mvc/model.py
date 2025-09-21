@@ -17,8 +17,8 @@ class Model:
     def toggle_activation(self, on_success: Callable[[], None], on_failure: Callable[[Exception], None]) -> None:
         # Define task
         def function():
+            active = self._player.is_active()
             try:
-                active = self._player.is_active()
                 if active:
                     self._player.deactivate()
                 else:
