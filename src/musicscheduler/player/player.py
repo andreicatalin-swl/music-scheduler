@@ -1,11 +1,11 @@
+from musicscheduler.utils.nosleep import allow_sleep, prevent_sleep
+from musicscheduler.utils.queueing import Queueing
 from musicscheduler.player.playlist import Playlist
 from musicscheduler.player.scheduler import Scheduler
 from musicscheduler.player.state import State
 from musicscheduler.player.state_machine import StateMachine
 from musicscheduler.utils.logger import get_logger
 from logging import INFO, DEBUG
-
-from musicscheduler.utils.queueing import Queueing
 
 LOGGING_CONSOLE_HANDLER_THRESHOLD_LEVEL = INFO
 LOGGING_FILE_HANDLER_THRESHOLD_LEVEL = DEBUG
@@ -107,10 +107,24 @@ class Player(StateMachine):
     def activate(self) -> None:
         super().activate()
 
+        # Attempt to prevent system sleep while Player is active
+        try:
+            prevent_sleep()
+        except Exception as e:
+            message = f'Failed to prevent system sleep while Player is active: \'{e}\'.'
+            LOGGER.warning(message)
+
         self._scheduler.activate()
 
     def deactivate(self) -> None:
         super().deactivate()
+
+        # Attempt to allow system sleep while Player is inactive
+        try:
+            allow_sleep()
+        except Exception as e:
+            message = f'Failed to allow system sleep while Player is inactive: \'{e}\'.'
+            LOGGER.warning(message)
 
         self._scheduler.deactivate()
         # Playlist may already not be in State.ACTIVE if no track is playing
