@@ -23,7 +23,7 @@ class Playlist(StateMachine):
     _DEFAULT_DIRECTORY: ClassVar[str] = ''
     _DEFAULT_SHUFFLE: ClassVar[bool] = False
     
-    _VALID_EXTENSIONS: tuple[str, ...] = ('.mp3', '.wav', '.flac')
+    _VALID_EXTENSIONS: tuple[str, ...] = ('.mp3', '.wav')
     _UPDATE_RATE: int = 10
 
     _PLAYLIST_DIRECTORY_CACHE_KEY: ClassVar[str] = 'playlist_directory'
@@ -77,21 +77,14 @@ class Playlist(StateMachine):
                 if not exists:
                     return []
             
+                # Get path for every music file (extensions supported in self._VALID_EXTENSIONS) from directory
                 tracks = [os.path.join(self._directory, file) for file in os.listdir(self._directory) if file.lower().endswith(self._VALID_EXTENSIONS)]
-                message = f'Found tracks: {tracks}.'
-                LOGGER.debug(message)
 
                 if self._shuffle:
                     random.shuffle(tracks)
 
                 return tracks
             
-            exists = os.path.exists(self._directory)
-            # If directory is not valid, log a warning message
-            if not exists:
-                message = f'Directory \'{self._directory}\' does not exist. No tracks will be added.'
-                LOGGER.warning(message)
-    
             clock = pygame.time.Clock()
             # Keep running while state is not set to State.INACTIVE
             while self._state != State.INACTIVE:
@@ -107,6 +100,9 @@ class Playlist(StateMachine):
                 track = self._tracks.pop(0)
                 pygame.mixer.music.load(track)
                 pygame.mixer.music.play()
+
+                message = f'Playing track {track}.'
+                LOGGER.debug(message)
 
                 # Wait for track to end before moving to the next one
                 while pygame.mixer.music.get_busy():
