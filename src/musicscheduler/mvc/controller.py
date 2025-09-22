@@ -227,9 +227,6 @@ class Controller:
 
         # Define on success callback to reflect possible changes on UI, even if previous task fails
         def on_success_show(shuffle):
-            message = f'Function execution successful.'
-            LOGGER.debug(message)
-
             function = self._view.toggle_playlist_shuffle
             args = (shuffle, )
             self._view.run_on_ui_thread(function, *args)
@@ -254,9 +251,6 @@ class Controller:
 
         # Define on success callback to reflect possible changes on UI, even if previous task fails
         def on_success_show(shuffle):
-            message = f'Function execution successful.'
-            LOGGER.debug(message)
-
             function = self._view.toggle_playlist_shuffle
             args = (shuffle, )
             self._view.run_on_ui_thread(function, *args)
