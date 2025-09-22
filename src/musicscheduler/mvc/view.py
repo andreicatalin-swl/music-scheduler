@@ -141,10 +141,6 @@ class View(tk.Tk):
         return lbl
     
     def show_error(self, message: str) -> None:
-        # Set error window icon
-        icon_path = View._get_resource_path(os.path.join('assets', 'icon.ico'))
-        self._error_window.iconbitmap(icon_path)
-
         # Check if an error window is already open
         if hasattr(self, '_error_window') and self._error_window.winfo_exists():
             self._error_window.children['!label'].config(text=message)
@@ -156,6 +152,10 @@ class View(tk.Tk):
         self._error_window.title(self._ERROR_WINDOW_TITLE)
         self._error_window.geometry(self._ERROR_WINDOW_SIZE)
         self._error_window.configure(bg=self._BG)
+
+        # Set error window icon
+        icon_path = View._get_resource_path(os.path.join('assets', 'icon.ico'))
+        self._error_window.iconbitmap(icon_path)
 
         error_label = tk.Label(self._error_window, text=message, font=('Inter', 12), bg=self._BG, fg='red', wraplength=280)
         error_label.pack(expand=True, fill='both', padx=12, pady=12)
