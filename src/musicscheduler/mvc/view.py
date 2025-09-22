@@ -47,11 +47,17 @@ class View(tk.Tk):
     def __init__(self) -> None:
         super().__init__()
 
+        # Hide window while configuring
+        self.withdraw()
+
         # Main window setup
         self.title(self._WINDOW_TITLE)
         self.geometry(self._WINDOW_SIZE)
         self.resizable(self._RESIZABLE_WINDOW_HEIGHT, self._RESIZABLE_WINDOW_HEIGHT)
         self.configure(bg=self._BG)
+
+        # Center window
+        self._center_window(self, self._WINDOW_SIZE)
 
         # Set main window icon
         icon_path = View._get_resource_path(os.path.join('assets', 'icon.ico'))
@@ -62,6 +68,9 @@ class View(tk.Tk):
 
         # Update clock
         self._update_clock()
+
+        # Show window after configuring
+        self.deiconify()
 
     def run_on_ui_thread(self, function: Callable[..., Any], *args: Any, **kwargs: Any) -> None:
         if not callable(function):
@@ -146,12 +155,20 @@ class View(tk.Tk):
             self._error_window.children['!label'].config(text=message)
             self._error_window.lift()
             return
+        
 
         # Create new error window
         self._error_window = tk.Toplevel(self)
+
+        # Hide error window while configuring
+        self._error_window.withdraw()
+
         self._error_window.title(self._ERROR_WINDOW_TITLE)
         self._error_window.geometry(self._ERROR_WINDOW_SIZE)
         self._error_window.configure(bg=self._BG)
+
+        # Center window
+        self._center_window(self._error_window, self._ERROR_WINDOW_SIZE)
 
         # Set error window icon
         icon_path = View._get_resource_path(os.path.join('assets', 'icon.ico'))
@@ -164,6 +181,9 @@ class View(tk.Tk):
         ok_button.pack(pady=(0, 12))
 
         self._error_window.protocol("WM_DELETE_WINDOW", self._close_error_window)
+
+        # Show error window after configuring
+        self._error_window.deiconify()
 
     def _close_error_window(self):
         if hasattr(self, '_error_window') and self._error_window.winfo_exists():
@@ -184,6 +204,24 @@ class View(tk.Tk):
         img = Image.open(path).resize(size, Image.Resampling.LANCZOS)
         return ImageTk.PhotoImage(img)
     
+    @staticmethod
+    def _center_window(window: tk.Toplevel | tk.Tk, default_size: str | None = None) -> None:
+        window.update_idletasks()
+        width = window.winfo_width()
+        height = window.winfo_height()
+
+        if width <= 1 or height <= 1:
+            if default_size:
+                width, height = map(int, default_size.split("x"))
+
+        screen_width = window.winfo_screenwidth()
+        screen_height = window.winfo_screenheight()
+
+        x = (screen_width // 2) - (width // 2)
+        y = (screen_height // 2) - (height // 2)
+
+        window.geometry(f'{width}x{height}+{x}+{y}')
+        
     def toggle_activation(self, activate: bool) -> None:
         if activate:
             self.status_chip.config(text=self._ACTIVE_STATUS_STRING, bg=self._ACTIVE_STATUS_COLOR)
