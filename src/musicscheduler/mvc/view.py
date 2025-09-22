@@ -47,13 +47,13 @@ class View(tk.Tk):
     def __init__(self) -> None:
         super().__init__()
 
-        # Window setup
+        # Main window setup
         self.title(self._WINDOW_TITLE)
         self.geometry(self._WINDOW_SIZE)
         self.resizable(self._RESIZABLE_WINDOW_HEIGHT, self._RESIZABLE_WINDOW_HEIGHT)
         self.configure(bg=self._BG)
 
-        # Set application icon
+        # Set main window icon
         icon_path = View._get_resource_path(os.path.join('assets', 'icon.ico'))
         self.iconbitmap(icon_path)
         
@@ -141,6 +141,10 @@ class View(tk.Tk):
         return lbl
     
     def show_error(self, message: str) -> None:
+        # Set error window icon
+        icon_path = View._get_resource_path(os.path.join('assets', 'icon.ico'))
+        self._error_window.iconbitmap(icon_path)
+
         # Check if an error window is already open
         if hasattr(self, '_error_window') and self._error_window.winfo_exists():
             self._error_window.children['!label'].config(text=message)
