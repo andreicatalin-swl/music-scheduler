@@ -75,8 +75,6 @@ class Playlist(StateMachine):
                 exists = os.path.exists(self._directory)
                 # If directory is not valid, do not add any tracks
                 if not exists:
-                    message = f'Directory \'{self._directory}\' does not exist. Found tracks: [].'
-                    LOGGER.warning(message)
                     return []
             
                 tracks = [os.path.join(self._directory, file) for file in os.listdir(self._directory) if file.lower().endswith(self._VALID_EXTENSIONS)]
@@ -87,6 +85,12 @@ class Playlist(StateMachine):
                     random.shuffle(tracks)
 
                 return tracks
+            
+            exists = os.path.exists(self._directory)
+            # If directory is not valid, log a warning message
+            if not exists:
+                message = f'Directory \'{self._directory}\' does not exist. No tracks will be added.'
+                LOGGER.warning(message)
     
             clock = pygame.time.Clock()
             # Keep running while state is not set to State.INACTIVE
