@@ -1,6 +1,6 @@
 import os
 import json
-from typing import Any, ClassVar
+from typing import Any, ClassVar, Optional
 from appdirs import user_data_dir
 from musicscheduler.__about__ import __app_name__, __author__
 from musicscheduler.utils.logger import get_logger
@@ -11,7 +11,7 @@ LOGGING_FILE_HANDLER_THRESHOLD_LEVEL = DEBUG
 LOGGER = get_logger(__name__, LOGGING_CONSOLE_HANDLER_THRESHOLD_LEVEL, LOGGING_FILE_HANDLER_THRESHOLD_LEVEL)
 
 class Cache:
-    _instance: ClassVar['Cache' | None] = None
+    _instance: ClassVar[Optional['Cache']] = None
 
     _DEFAULT_FOLDER: ClassVar[str] = 'cache'
     _DEFAULT_FILE_NAME: ClassVar[str] = 'cache.json'
