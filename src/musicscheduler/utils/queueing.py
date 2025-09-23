@@ -23,13 +23,15 @@ class Queueing:
         # Prevent reinitialization
         if hasattr(self, "_initialized") and self._initialized:
             return
-        self._initialized = True
 
         # Initialize state and start worker thread
         self._running = True
         self._queue: Queue[Callable[[], None]] = Queue()
         self._worker: threading.Thread = threading.Thread(target=self._run, daemon=True)
         self._worker.start()
+
+        # Used to prevent re-initialization
+        self._initialized = True
 
     def add(self, function: Callable[[], None]) -> None:
         if not self._running:
