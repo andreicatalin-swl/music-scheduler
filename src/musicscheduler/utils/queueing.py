@@ -31,7 +31,7 @@ class Queueing:
         self._worker.start()
 
         # Used to prevent re-initialization
-        self._initialized = True
+        self._initialized: bool = True
 
     def add(self, function: Callable[[], None]) -> None:
         if not self._running:
