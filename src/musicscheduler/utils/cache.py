@@ -11,10 +11,20 @@ LOGGING_FILE_HANDLER_THRESHOLD_LEVEL = DEBUG
 LOGGER = get_logger(__name__, LOGGING_CONSOLE_HANDLER_THRESHOLD_LEVEL, LOGGING_FILE_HANDLER_THRESHOLD_LEVEL)
 
 class Cache:
+    _instance: ClassVar['Cache' | None] = None
+
     _DEFAULT_FOLDER: ClassVar[str] = 'cache'
     _DEFAULT_FILE_NAME: ClassVar[str] = 'cache.json'
 
+    def __new__(cls, *args, **kwargs):
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)
+        return cls._instance
+
     def __init__(self, folder: str = _DEFAULT_FOLDER, file_name: str = _DEFAULT_FILE_NAME) -> None:
+        if hasattr(self, '_initialized') and self._initialized:
+            return
+
         # Determine a safe base directory to write in/read from
         base_dir = user_data_dir(__app_name__, appauthor=__author__)
         os.makedirs(base_dir, exist_ok=True)
@@ -25,6 +35,9 @@ class Cache:
         self._cache_file: str = cache_file
         self._data: dict[str, Any] = {}
         self._load()
+
+        # Used to prevent re-initialization
+        self._initialized: bool = True
     
     def _load(self) -> None:
         if os.path.exists(self._cache_file):
