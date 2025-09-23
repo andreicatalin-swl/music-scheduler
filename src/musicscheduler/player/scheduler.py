@@ -170,10 +170,10 @@ class Scheduler(StateMachine):
             # Add scheduled jobs
             self._background_scheduler.add_job(func=lambda: self._on_start(), trigger='cron', day_of_week=day, hour=start.hour, minute=start.minute, second=start.second, misfire_grace_time=1)
             self._background_scheduler.add_job(func=lambda: self._on_end(), trigger='cron', day_of_week=day, hour=end.hour, minute=end.minute, second=end.second, misfire_grace_time=1)
-
-            message = f'Added interval {interval}.'
-            LOGGER.debug(message)
     
+        message = f'Added {len(intervals)} intervals.'
+        LOGGER.debug(message)
+
     def activate(self) -> None:
         super().activate()
 
