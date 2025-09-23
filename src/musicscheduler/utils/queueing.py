@@ -1,6 +1,6 @@
 from queue import Queue
 import threading
-from typing import Callable
+from typing import Callable, ClassVar, Optional
 from musicscheduler.utils.logger import get_logger
 from logging import INFO, DEBUG
 
@@ -12,7 +12,7 @@ class UnexpectedOperationError(Exception):
     pass
 
 class Queueing:
-    _instance = None
+    _instance: ClassVar[Optional['Queueing']] = None
 
     def __new__(cls, *args, **kwargs):
         if cls._instance is None:
