@@ -22,6 +22,8 @@ class Playlist(StateMachine):
 
     _DEFAULT_DIRECTORY: ClassVar[str] = ''
     _DEFAULT_SHUFFLE: ClassVar[bool] = False
+    # The fade out blocks the thread until it is complete. A value higher than 1000 (ms) may cause delays in the queue if intervals are close together. It is recommended that this value is not greater than the minimum gap in allowed between intervals.
+    _DEFAULT_FADE_OUT_DURATION: ClassVar[int] = 1000
     
     _VALID_EXTENSIONS: tuple[str, ...] = ('.mp3', '.wav')
     _UPDATE_RATE: int = 10
@@ -29,11 +31,12 @@ class Playlist(StateMachine):
     _PLAYLIST_DIRECTORY_CACHE_KEY: ClassVar[str] = 'playlist_directory'
     _PLAYLIST_SHUFFLE_CACHE_KEY: ClassVar[str] = 'playlist_shuffle'
 
-    def __init__(self, directory: str = _DEFAULT_DIRECTORY, shuffle: bool = _DEFAULT_SHUFFLE) -> None:
+    def __init__(self, directory: str = _DEFAULT_DIRECTORY, shuffle: bool = _DEFAULT_SHUFFLE, fade_out_duration: int = _DEFAULT_FADE_OUT_DURATION) -> None:
         super().__init__()
 
         self._directory: str = directory
         self._shuffle: bool = shuffle
+        self._fade_out_duration: int = fade_out_duration
 
         self._cache: Cache = Cache()
         self._worker: Optional[threading.Thread] = None
@@ -121,7 +124,7 @@ class Playlist(StateMachine):
             # Start worker thread
             self._worker.start()
         
-    def deactivate(self) -> None:
+    def deactivate(self, fade_out: bool) -> None:
         super().deactivate()
 
         if self._worker is None:
@@ -141,7 +144,15 @@ class Playlist(StateMachine):
             message = f'Cannot stop current track: no track is playing.'
             LOGGER.debug(message)
         else:
-            # Stop playing any tracks
+            if fade_out:
+                # Fade out current track
+                pygame.mixer.music.fadeout(self._fade_out_duration)
+
+                # Keep thread blocked until current track fades out
+                clock = pygame.time.Clock()
+                while pygame.mixer.music.get_busy():
+                    clock.tick(self._UPDATE_RATE)
+            # Stop playing current track
             pygame.mixer.music.stop()
 
     def shutdown(self) -> None:

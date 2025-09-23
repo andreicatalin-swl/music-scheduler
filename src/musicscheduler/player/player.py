@@ -91,7 +91,7 @@ class Player(StateMachine):
         def function():
             try:
                 if self._playlist.is_active():
-                    self._playlist.deactivate()
+                    self._playlist.deactivate(fade_out=True)
                 else:
                     message = 'Playlist is not in State.ACTIVE, no tracks are playing.'
                     LOGGER.debug(message)
@@ -127,7 +127,7 @@ class Player(StateMachine):
         self._scheduler.deactivate()
         # Playlist may already not be in State.ACTIVE if no track is playing
         if self._playlist.is_active():
-            self._playlist.deactivate()
+            self._playlist.deactivate(fade_out=False)
         else:
             message = 'Playlist is not in State.ACTIVE, no tracks are playing.'
             LOGGER.debug(message)
