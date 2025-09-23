@@ -98,7 +98,7 @@ class Scheduler(StateMachine):
             if not exists:
                 message = f'Directory \'{self._directory}\' does not exist. Found intervals = [].'
                 LOGGER.warning(message)       
-                return []
+                raise ValueError(message)
 
             intervals = []
             # Interval template: [start HH:MM:SS, end HH:MM:SS, day]
