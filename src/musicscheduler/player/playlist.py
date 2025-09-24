@@ -22,7 +22,7 @@ class Playlist(StateMachine):
 
     _DEFAULT_DIRECTORY: ClassVar[str] = ''
     _DEFAULT_SHUFFLE: ClassVar[bool] = False
-    # The fade out blocks the thread until it is complete. A value higher than 1000 (ms) may cause delays in the queue if intervals are close together. It is recommended that this value is not greater than the minimum gap in allowed between intervals.
+    # The fade out blocks the thread until it is complete. A value higher than 1000 (ms) may cause delays in the queue if intervals are close together. It is recommended that this value is not greater than the minimum gap allowed in between intervals.
     _DEFAULT_FADE_OUT_DURATION: ClassVar[int] = 1000
     
     _VALID_EXTENSIONS: tuple[str, ...] = ('.mp3', '.wav')
